@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "top.lingcar4870.aced.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "Aced.refmap.json",
+  "mixins": [
+    "PortalShapeMixin"
+  ],
+  "client": [
+    "MinecraftMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
