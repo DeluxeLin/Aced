@@ -12,7 +12,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
-import top.lingcar4870.aced.common.container.DeathInheritContainer;
+import top.lingcar4870.aced.common.container.DeathInheritContainerMenu;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -30,7 +30,7 @@ public class DeathInheritScroll extends Item {
 
         if (!pLevel.isClientSide && pPlayer instanceof ServerPlayer serverPlayer) {
             NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider(
-                    (id, inv, player) -> new DeathInheritContainer(id, inv),
+                    (id, inv, player) -> new DeathInheritContainerMenu(id, inv),
                     Component.empty()
             ));
         }

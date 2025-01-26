@@ -1,9 +1,8 @@
 package top.lingcar4870.aced.client;
 
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.TagParser;
+import net.minecraft.nbt.NbtIo;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -12,10 +11,7 @@ import top.lingcar4870.aced.common.DeathInheritDataHelper;
 
 import javax.annotation.Nullable;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 @OnlyIn(Dist.CLIENT)
@@ -54,9 +50,9 @@ public class ClientDIDataHelper {
             return;
         }
 
-        try (FileInputStream fis = new FileInputStream(saveFile)) {
-            activeDIData = TagParser.parseTag(new String(fis.readAllBytes()));
-        } catch (IOException | CommandSyntaxException e) {
+        try {
+            activeDIData = NbtIo.read(saveFile);
+        } catch (IOException e) {
             Aced.LOGGER.error("Failed to read DeathInheritData!", e);
         }
     }
@@ -84,9 +80,11 @@ public class ClientDIDataHelper {
                 saveFile.createNewFile();
             }
 
-            FileOutputStream fos = new FileOutputStream(saveFile);
-            fos.write(data.toString().getBytes(StandardCharsets.UTF_8));
-            fos.close();
+//            FileOutputStream fos = new FileOutputStream(saveFile);
+//            fos.write(data.toString().getBytes(StandardCharsets.UTF_8));
+//            fos.close();
+
+            NbtIo.write(data, saveFile);
         } catch (IOException e) {
             Aced.LOGGER.error("Failed to storage DeathInheritData!", e);
         }
