@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -32,13 +33,13 @@ public class Aced {
     );
     public static IEventBus modBus;
 
-    public static final int DEATH_INHERIT_SLOTS = 9;
-
     public Aced(FMLJavaModLoadingContext context) {
         modBus = context.getModEventBus();
         AcedItems.ITEMS.register(modBus);
         AcedContainers.MENUS.register(modBus);
         modBus.register(this);
+
+        context.registerConfig(ModConfig.Type.COMMON, AcedConfig.COMMON);
     }
 
     @SubscribeEvent

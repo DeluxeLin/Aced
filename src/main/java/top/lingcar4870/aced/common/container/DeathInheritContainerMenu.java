@@ -16,6 +16,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import top.lingcar4870.aced.AcedConfig;
 import top.lingcar4870.aced.common.DeathInheritDataHelper;
 
 import javax.annotation.Nullable;
@@ -24,13 +25,11 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 public class DeathInheritContainerMenu extends AbstractContainerMenu {
-    public static final int MAX_STACK_SIZE = 8;
-    private static final int SIZE = 9;
     private final DeathInheritContainer container;
     private final int containerSize;
 
     public DeathInheritContainerMenu(int containerId, Inventory playerInventory) {
-        this(containerId, playerInventory, new DeathInheritContainer(SIZE), SIZE);
+        this(containerId, playerInventory, new DeathInheritContainer(AcedConfig.DEATH_INHERIT_CONTAINER_SIZE.get()), AcedConfig.DEATH_INHERIT_CONTAINER_SIZE.get());
     }
 
     public DeathInheritContainerMenu(int containerId, Inventory playerInventory, DeathInheritContainer pContainer, int containerSize) {
@@ -200,7 +199,7 @@ public class DeathInheritContainerMenu extends AbstractContainerMenu {
 
         @Override
         public int getMaxStackSize() {
-            return MAX_STACK_SIZE;
+            return AcedConfig.DEATH_INHERIT_MAX_STACK_SIZE.get();
         }
 
         public void fromTag(ListTag pContainerNbt) {
